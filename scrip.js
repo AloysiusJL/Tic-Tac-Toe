@@ -9,6 +9,17 @@ let players = [
     {player2: "O"}
 ];
 
+const G0 = document.getElementById('G0')
+const G1 = document.getElementById('G1')
+const G2 = document.getElementById('G2')
+const G3 = document.getElementById('G3')
+const G4 = document.getElementById('G4')
+const G5 = document.getElementById('G5')
+const G6 = document.getElementById('G6')
+const G7 = document.getElementById('G7')
+const G8 = document.getElementById('G8')
+const grid = document.querySelectorAll('.grid')
+
 console.log(myArray);
 
 // win condition
@@ -23,3 +34,15 @@ function checkWinner(){
     else if (myArray[2] == "X" && myArray[5] == "X" && myArray[8] == "X") console.log('You win!');
     else return;
 }
+
+//hover
+
+grid.forEach(box => {
+    box.addEventListener('mouseover', () => {
+        box.classList.add('hover')
+    })
+    box.addEventListener('mouseleave', () => {
+        box.classList.remove('hover')
+    })
+})
+

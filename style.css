@@ -1,0 +1,81 @@
+.container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px;
+}
+
+.hover{
+    background-color: yellow;
+    opacity: 30%;
+}
+
+.G0{
+    text-align: center;
+    font-size: 200px;
+    border-right: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+}
+
+.G1{
+    text-align: center;
+    font-size: 200px;
+    border-right: 2.5px solid black;
+    border-left: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+}
+
+.G2{
+    text-align: center;
+    font-size: 200px;
+    border-left: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+}
+
+.G3{
+    text-align: center;
+    font-size: 200px;
+    border-right: 2.5px solid black;
+    border-top: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+}
+
+.G4{
+    text-align: center;
+    font-size: 200px;
+    border: 2.5px solid black;
+}
+
+.G5{
+    text-align: center;
+    font-size: 200px;
+    border-left: 2.5px solid black;
+    border-top: 2.5px solid black;
+    border-bottom: 2.5px solid black;
+}
+
+.G6{
+    text-align: center;
+    font-size: 200px;
+    border-right: 2.5px solid black;
+    border-top: 2.5px solid black;
+}
+
+.G7{
+    text-align: center;
+    font-size: 200px;
+    border-right: 2.5px solid black;
+    border-left: 2.5px solid black;
+    border-top: 2.5px solid black;
+}
+
+.G8{
+    text-align: center;
+    font-size: 200px;
+    border-left: 2.5px solid black;
+    border-top: 2.5px solid black;
+}
+
+
+
+

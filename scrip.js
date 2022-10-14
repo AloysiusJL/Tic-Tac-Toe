@@ -36,26 +36,24 @@ function checkWinner(){
 
 function populateArray(){
     if (G0.textContent == 'X') myArray[0] = 'X';
-    else if (G1.textContent == 'X') myArray[1] = 'X';
-    else if (G2.textContent == 'X') myArray[2] = 'X';
-    else if (G3.textContent == 'X') myArray[3] = 'X';
-    else if (G4.textContent == 'X') myArray[4] = 'X';
-    else if (G5.textContent == 'X') myArray[5] = 'X';
-    else if (G6.textContent == 'X') myArray[6] = 'X';
-    else if (G7.textContent == 'X') myArray[7] = 'X';
-    else if (G8.textContent == 'X') myArray[8] = 'X';
+    if (G1.textContent == 'X') myArray[1] = 'X';
+    if (G2.textContent == 'X') myArray[2] = 'X';
+    if (G3.textContent == 'X') myArray[3] = 'X';
+    if (G4.textContent == 'X') myArray[4] = 'X';
+    if (G5.textContent == 'X') myArray[5] = 'X';
+    if (G6.textContent == 'X') myArray[6] = 'X';
+    if (G7.textContent == 'X') myArray[7] = 'X';
+    if (G8.textContent == 'X') myArray[8] = 'X';
 
-    else if (G0.textContent == 'O') myArray[0] = 'O';
-    else if (G1.textContent == 'O') myArray[1] = 'O';
-    else if (G2.textContent == 'O') myArray[2] = 'O';
-    else if (G3.textContent == 'O') myArray[3] = 'O';
-    else if (G4.textContent == 'O') myArray[4] = 'O';
-    else if (G5.textContent == 'O') myArray[5] = 'O';
-    else if (G6.textContent == 'O') myArray[6] = 'O';
-    else if (G7.textContent == 'O') myArray[7] = 'O';
-    else if (G8.textContent == 'O') myArray[8] = 'O';
-
-    else return;
+    if (G0.textContent == 'O') myArray[0] = 'O';
+    if (G1.textContent == 'O') myArray[1] = 'O';
+    if (G2.textContent == 'O') myArray[2] = 'O';
+    if (G3.textContent == 'O') myArray[3] = 'O';
+    if (G4.textContent == 'O') myArray[4] = 'O';
+    if (G5.textContent == 'O') myArray[5] = 'O';
+    if (G6.textContent == 'O') myArray[6] = 'O';
+    if (G7.textContent == 'O') myArray[7] = 'O';
+    if (G8.textContent == 'O') myArray[8] = 'O';
 }
 
 function changePlayer(){

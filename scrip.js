@@ -4,10 +4,9 @@ let myArray = [
     "","",""
 ];
 
-let players = [
-    {player1: "X"},
-    {player2: "O"}
-];
+const player1 = "X";
+const player2 = "O";
+let curentPlayer = player1;
 
 const G0 = document.getElementById('G0')
 const G1 = document.getElementById('G1')
@@ -35,14 +34,49 @@ function checkWinner(){
     else return;
 }
 
-//hover
+function populateArray(){
+    if (G0.textContent == 'X') myArray[0] = 'X';
+    else if (G1.textContent == 'X') myArray[1] = 'X';
+    else if (G2.textContent == 'X') myArray[2] = 'X';
+    else if (G3.textContent == 'X') myArray[3] = 'X';
+    else if (G4.textContent == 'X') myArray[4] = 'X';
+    else if (G5.textContent == 'X') myArray[5] = 'X';
+    else if (G6.textContent == 'X') myArray[6] = 'X';
+    else if (G7.textContent == 'X') myArray[7] = 'X';
+    else if (G8.textContent == 'X') myArray[8] = 'X';
 
+    else if (G0.textContent == 'O') myArray[0] = 'O';
+    else if (G1.textContent == 'O') myArray[1] = 'O';
+    else if (G2.textContent == 'O') myArray[2] = 'O';
+    else if (G3.textContent == 'O') myArray[3] = 'O';
+    else if (G4.textContent == 'O') myArray[4] = 'O';
+    else if (G5.textContent == 'O') myArray[5] = 'O';
+    else if (G6.textContent == 'O') myArray[6] = 'O';
+    else if (G7.textContent == 'O') myArray[7] = 'O';
+    else if (G8.textContent == 'O') myArray[8] = 'O';
+
+    else return;
+}
+
+function changePlayer(){
+    if (curentPlayer === player1) curentPlayer = player2;
+    else curentPlayer = player1;
+
+}
+
+//hover & click
 grid.forEach(box => {
     box.addEventListener('mouseover', () => {
         box.classList.add('hover')
     })
     box.addEventListener('mouseleave', () => {
         box.classList.remove('hover')
+    })
+    box.addEventListener('click', () => {
+        box.textContent = curentPlayer
+        populateArray()
+        checkWinner()
+        changePlayer()
     })
 })
 

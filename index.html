@@ -11,7 +11,7 @@
 <body>
     <div class="title">
         <h1>Tic Tac Toe</h4>
-        <h2>XOXO</h3>
+        <h1 id="isPlaying"></h1>
     </div>
     <div class="container">
         <div class="grid G0" id="G0" data-index="0"></div>
@@ -24,5 +24,15 @@
         <div class="grid G7" id="G7" data-index="7"></div>
         <div class="grid G8" id="G8" data-index="8"></div>
     </div>
+
+    <div id="winnerModal" class="modal">
+        <div class="modal-content">
+          <h2 id="winnerMessage"></h2>
+          <a href="https://mrbego.github.io/Tic-Tac-Toe/">
+            <button id="playAgainButton">Play again</button>
+          </a>
+        </div>
+      </div>
+
 </body>
 </html>

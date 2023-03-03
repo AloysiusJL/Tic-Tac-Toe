@@ -20,28 +20,30 @@ const G6 = document.getElementById('G6')
 const G7 = document.getElementById('G7')
 const G8 = document.getElementById('G8')
 const grid = document.querySelectorAll('.grid')
+const nowPlaying = document.querySelector('#isPlaying')
+const winner = document.querySelector('#winnerMessage')
 
 console.log(myArray);
 
 // win condition
 function checkWinner(){
-    if (myArray[0] == "X" && myArray[1] == "X" && myArray[2] == "X") console.log('You win!');
-    else if (myArray[3] == "X" && myArray[4] == "X" && myArray[5] == "X") console.log('Player 1 win!');
-    else if (myArray[6] == "X" && myArray[7] == "X" && myArray[8] == "X") console.log('Player 1 win!');
-    else if (myArray[0] == "X" && myArray[4] == "X" && myArray[8] == "X") console.log('Player 1 win!');
-    else if (myArray[6] == "X" && myArray[4] == "X" && myArray[2] == "X") console.log('Player 1 win!');
-    else if (myArray[0] == "X" && myArray[3] == "X" && myArray[6] == "X") console.log('Player 1 win!');
-    else if (myArray[1] == "X" && myArray[4] == "X" && myArray[7] == "X") console.log('Player 1 win!');
-    else if (myArray[2] == "X" && myArray[5] == "X" && myArray[8] == "X") console.log('Player 1 win!');
+    if (myArray[0] == "X" && myArray[1] == "X" && myArray[2] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[3] == "X" && myArray[4] == "X" && myArray[5] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[6] == "X" && myArray[7] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[0] == "X" && myArray[4] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[6] == "X" && myArray[4] == "X" && myArray[2] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[0] == "X" && myArray[3] == "X" && myArray[6] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[1] == "X" && myArray[4] == "X" && myArray[7] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
+    else if (myArray[2] == "X" && myArray[5] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
 
-    else if (myArray[0] == "O" && myArray[1] == "O" && myArray[2] == "O") console.log('Player 2 win!');
-    else if (myArray[3] == "O" && myArray[4] == "O" && myArray[5] == "O") console.log('Player 2 win!');
-    else if (myArray[6] == "O" && myArray[7] == "O" && myArray[8] == "O") console.log('Player 2 win!');
-    else if (myArray[0] == "O" && myArray[4] == "O" && myArray[8] == "O") console.log('Player 2 win!');
-    else if (myArray[6] == "O" && myArray[4] == "O" && myArray[2] == "O") console.log('Player 2 win!');
-    else if (myArray[0] == "O" && myArray[3] == "O" && myArray[6] == "O") console.log('Player 2 win!');
-    else if (myArray[1] == "O" && myArray[4] == "O" && myArray[7] == "O") console.log('Player 2 win!');
-    else if (myArray[2] == "O" && myArray[5] == "O" && myArray[8] == "O") console.log('Player 2 win!');
+    else if (myArray[0] == "O" && myArray[1] == "O" && myArray[2] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[3] == "O" && myArray[4] == "O" && myArray[5] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[6] == "O" && myArray[7] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[0] == "O" && myArray[4] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[6] == "O" && myArray[4] == "O" && myArray[2] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[0] == "O" && myArray[3] == "O" && myArray[6] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[1] == "O" && myArray[4] == "O" && myArray[7] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
+    else if (myArray[2] == "O" && myArray[5] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
 
     else return;
 }
@@ -74,6 +76,11 @@ function changePlayer(){
     else curentPlayer = player1;
 }
 
+function displayPlayer(){
+    if(curentPlayer === player1) nowPlaying.textContent = 'Now Playing: Player 1 (X)';
+    else nowPlaying.textContent = `Now Playing: Player 2 (O)`;
+}
+
 //hover & click
 grid.forEach(box => {
     box.addEventListener('mouseover', () => {
@@ -91,7 +98,9 @@ grid.forEach(box => {
         populateArray()
         checkWinner()
         changePlayer()
+        displayPlayer()
         // computerMove()
     })
 })
 
+displayPlayer()

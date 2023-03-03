@@ -27,8 +27,11 @@ console.log(myArray);
 
 // win condition
 function checkWinner(){
-    let isFilled = myArray.every(element => element !== "")
+let isFilled = myArray.every(element => element !== "")
     if (isFilled == true){
+         winner.textContent = `It's a tie!`, winnerModal.style.display = "block";
+    }
+
         if (myArray[0] == "X" && myArray[1] == "X" && myArray[2] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
         else if (myArray[3] == "X" && myArray[4] == "X" && myArray[5] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
         else if (myArray[6] == "X" && myArray[7] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
@@ -37,7 +40,7 @@ function checkWinner(){
         else if (myArray[0] == "X" && myArray[3] == "X" && myArray[6] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
         else if (myArray[1] == "X" && myArray[4] == "X" && myArray[7] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
         else if (myArray[2] == "X" && myArray[5] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-    
+
         else if (myArray[0] == "O" && myArray[1] == "O" && myArray[2] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
         else if (myArray[3] == "O" && myArray[4] == "O" && myArray[5] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
         else if (myArray[6] == "O" && myArray[7] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
@@ -46,9 +49,7 @@ function checkWinner(){
         else if (myArray[0] == "O" && myArray[3] == "O" && myArray[6] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
         else if (myArray[1] == "O" && myArray[4] == "O" && myArray[7] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
         else if (myArray[2] == "O" && myArray[5] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-    
-        else winner.textContent = `It's a tie!`, winnerModal.style.display = "block";
-    }
+        else return
 }
 
 function populateArray(){

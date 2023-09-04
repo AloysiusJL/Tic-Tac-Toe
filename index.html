@@ -2,42 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="container">
-        <div class="calculator">
-            <div class="screen" id="screen">
-                <div class="result" id="result"></div>
-                <div class="input" id="input"></div>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+        <div class="game-container">
+            <div class="grid" id="G0"></div>
+            <div class="grid" id="G1"></div>
+            <div class="grid" id="G2"></div>
+            <div class="grid" id="G3"></div>
+            <div class="grid" id="G4"></div>
+            <div class="grid" id="G5"></div>
+            <div class="grid" id="G6"></div>
+            <div class="grid" id="G7"></div>
+            <div class="grid" id="G8"></div>
+        </div>
+        <p id="isPlaying">Now Playing: Player 1 (X)</p>
+        <p id="winnerMessage"></p>
+        <button id="playAgainButton" style="display:none;">Play Again</button>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Choose Opponent:</h2>
+                <button id="playWithPlayerButton">Play with a Player</button>
+                <button id="playWithComputerButton">Play with Computer</button>
             </div>
-            <div class="pad" id="pad">
-            <!-- Operator buttons -->
-            <button class="operator" id="clear">C</button>
-            <button class="operator" id="ce">CE</button>
-            <button class="operator" id="delete">Delete</button>
-            <button class="operator" id="percentage">%</button>
-            <button class="operator" id="divide">/</button>
-            <button class="operator" id="multiply">*</button>
-            <button class="operator" id="subtract">-</button>
-            <button class="operator" id="add">+</button>
-            <button class="operator" id="toggle-sign">+/-</button>
-            <!-- Number and other buttons -->
-            <button class="numPad" id="numPad7">7</button>
-            <button class="numPad" id="numPad8">8</button>
-            <button class="numPad" id="numPad9">9</button>
-            <button class="numPad" id="numPad4">4</button>
-            <button class="numPad" id="numPad5">5</button>
-            <button class="numPad" id="numPad6">6</button>
-            <button class="numPad" id="numPad1">1</button>
-            <button class="numPad" id="numPad2">2</button>
-            <button class="numPad" id="numPad3">3</button>
-            <button class="numPad" id="numPad0">0</button>
-            <button class="numPad" id="decimal">.</button>
-            <button class="equal" id="equal">=</button>
         </div>
     </div>
     <script src="script.js"></script>

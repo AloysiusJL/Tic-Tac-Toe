@@ -1,100 +1,155 @@
-let input = ''; // User input string
-let result = null; // Result of the calculation
-let lastOperator = null; // Last operator clicked
-let lastClicked = null; // ID of the last clicked button
+let myArray = [
+    "", "", "",
+    "", "", "",
+    "", "", ""
+];
 
-const screen1 = document.getElementById('result');
-const screen2 = document.getElementById('input');
+let computerArray = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-const buttons = document.querySelectorAll('button');
+const player1 = "X";
+const player2 = "O";
+let currentPlayer = player1;
 
-// Add event listener to all buttons
-buttons.forEach(button => {
-    button.addEventListener('click', function () {
-        const value = button.textContent;
-        lastClicked = button.id;
+const G0 = document.getElementById('G0')
+const G1 = document.getElementById('G1')
+const G2 = document.getElementById('G2')
+const G3 = document.getElementById('G3')
+const G4 = document.getElementById('G4')
+const G5 = document.getElementById('G5')
+const G6 = document.getElementById('G6')
+const G7 = document.getElementById('G7')
+const G8 = document.getElementById('G8')
+const grid = document.querySelectorAll('.grid')
+const nowPlaying = document.querySelector('#isPlaying')
+const winner = document.querySelector('#winnerMessage')
+const playAgainButton = document.getElementById('playAgainButton')
+const modal = document.getElementById('modal')
+const playWithPlayerButton = document.getElementById('playWithPlayerButton')
+const playWithComputerButton = document.getElementById('playWithComputerButton')
 
-        if (value.match(/[0-9]/)) {
-            // Number button clicked
-            input += value;
-            updateScreen();
-        } else if (value === '.') {
-            // Decimal point button clicked
-            if (!input.includes('.') && !input.endsWith('.')) {
-                input += value;
-                updateScreen();
-            }
-        } else if (value === '=') {
-            // Equal button clicked
-            calculate();
-        } else if (value === 'C') {
-            // Clear button clicked
-            clear();
-        } else if (value === 'CE') {
-            // Clear Entry button clicked
-            clearEntry();
-        } else if (value === 'Delete') {
-            // Delete button clicked
-            deleteLastCharacter();
-        } else if (value === '%' && input) {
-            // Percentage button clicked
-            input = String(parseFloat(input) / 100);
-            updateScreen();
-        } else if (value === '+/-' && input && input.length > 0 && !isNaN(input)) {
-            // Toggle Sign button clicked only if there's input
-            input = String(-parseFloat(input));
-            updateScreen();
-        } else if (value.match(/[\+\-\*\/]/)) {
-            // Operator button clicked
-            if (lastOperator && lastClicked !== 'equal' && input.trim().endsWith(lastOperator)) {
-                // Replace the previous operator with the new one
-                input = input.trim().slice(0, -1) + value + ' ';
-            } else {
-                input += ' ' + value + ' ';
-            }
-            lastOperator = value;
-            updateScreen();
-        }
-    });
+console.log(myArray);
+
+// Initialize game mode (Player vs Player or Player vs Computer)
+let isPlayerVsComputer = false;
+
+playWithPlayerButton.addEventListener('click', () => {
+    isPlayerVsComputer = false;
+    modal.style.display = 'none';
+    startGame();
 });
 
-function updateScreen() {
-    screen2.textContent = input;
+playWithComputerButton.addEventListener('click', () => {
+    isPlayerVsComputer = true;
+    modal.style.display = 'none';
+    startGame();
+});
+
+function startGame() {
+    // Initialize game board
+    myArray = ["", "", "", "", "", "", "", "", ""];
+    grid.forEach(box => {
+        box.textContent = "";
+    });
+    playAgainButton.style.display = 'none';
+    currentPlayer = player1;
+    nowPlaying.textContent = 'Now Playing: Player 1 (X)';
+    winner.textContent = '';
+    winner.style.display = 'none';
 }
 
-function clear() {
-    input = '';
-    result = null;
-    lastOperator = null;
-    updateScreen();
-    screen1.textContent = '';
+// Add a function to check if the game is over
+function isGameOver() {
+    return myArray.every(element => element !== "") || checkWinner(player1) || checkWinner(player2);
 }
 
-function clearEntry() {
-    input = '';
-    updateScreen();
+// Win condition
+function checkWinner(player) {
+    if (
+        (myArray[0] == player && myArray[1] == player && myArray[2] == player) ||
+        (myArray[3] == player && myArray[4] == player && myArray[5] == player) ||
+        (myArray[6] == player && myArray[7] == player && myArray[8] == player) ||
+        (myArray[0] == player && myArray[4] == player && myArray[8] == player) ||
+        (myArray[6] == player && myArray[4] == player && myArray[2] == player) ||
+        (myArray[0] == player && myArray[3] == player && myArray[6] == player) ||
+        (myArray[1] == player && myArray[4] == player && myArray[7] == player) ||
+        (myArray[2] == player && myArray[5] == player && myArray[8] == player)
+    ) {
+        return true;
+    }
+    return false;
 }
 
-function deleteLastCharacter() {
-    input = input.slice(0, -1);
-    updateScreen();
+function populateArray(index) {
+    myArray[index] = currentPlayer;
 }
 
-function calculate() {
-    try {
-        result = eval(input);
-        if (!isNaN(result)) {
-            input = String(result);
-            updateScreen();
-            screen1.textContent = '';
-        } else {
-            input = 'Error';
-            updateScreen();
-            clear();
+function changePlayer() {
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+}
+
+function displayPlayer() {
+    if (currentPlayer === player1) nowPlaying.textContent = 'Now Playing: Player 1 (X)';
+    else nowPlaying.textContent = 'Now Playing: Player 2 (O)';
+}
+
+// Game logic
+grid.forEach((box, index) => {
+    box.addEventListener('mouseover', () => {
+        if (!box.textContent && !isGameOver()) {
+            box.classList.add('hover')
         }
-    } catch (error) {
-        input = 'Error';
-        updateScreen();
-        clear();
+    })
+    box.addEventListener('mouseleave', () => {
+        box.classList.remove('hover')
+    })
+    box.addEventListener('click', () => {
+        if (!box.textContent && !isGameOver()) {
+            box.textContent = currentPlayer;
+            populateArray(index);
+            if (checkWinner(currentPlayer)) {
+                winner.textContent = `Player ${currentPlayer} wins!`;
+                winner.style.display = 'block';
+                playAgainButton.style.display = 'block';
+            } else if (myArray.every(element => element !== "")) {
+                winner.textContent = `It's a tie!`;
+                winner.style.display = 'block';
+                playAgainButton.style.display = 'block';
+            } else {
+                changePlayer();
+                displayPlayer();
+                if (isPlayerVsComputer && currentPlayer === player2) {
+                    computerMove();
+                }
+            }
+        }
+    })
+})
+
+playAgainButton.addEventListener('click', () => {
+    startGame();
+    if (isPlayerVsComputer && currentPlayer === player2) {
+        computerMove();
+    }
+});
+
+function computerMove() {
+    // Implement the logic for the computer's move here
+    // For simplicity, you can randomly select an available empty cell
+    const emptyCells = myArray.reduce((acc, value, index) => {
+        if (value === "") {
+            acc.push(index);
+        }
+        return acc;
+    }, []);
+
+    if (emptyCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        const computerChoice = emptyCells[randomIndex];
+        setTimeout(() => {
+            grid[computerChoice].click();
+        }, 1000); // Add a delay to make it seem like the computer is "thinking"
     }
 }
+
+displayPlayer();
+modal.style.display = 'block'; // Display the modal to choose game mode

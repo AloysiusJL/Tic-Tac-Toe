@@ -1,110 +1,100 @@
-let myArray = [
-    "","","",
-    "","","",
-    "","",""
-];
+let input = ''; // User input string
+let result = null; // Result of the calculation
+let lastOperator = null; // Last operator clicked
+let lastClicked = null; // ID of the last clicked button
 
-let computerArray = [0,1,2,3,4,5,6,7,8]
+const screen1 = document.getElementById('result');
+const screen2 = document.getElementById('input');
 
-const player1 = "X";
-const player2 = "O";
-let curentPlayer = player1;
+const buttons = document.querySelectorAll('button');
 
-const G0 = document.getElementById('G0')
-const G1 = document.getElementById('G1')
-const G2 = document.getElementById('G2')
-const G3 = document.getElementById('G3')
-const G4 = document.getElementById('G4')
-const G5 = document.getElementById('G5')
-const G6 = document.getElementById('G6')
-const G7 = document.getElementById('G7')
-const G8 = document.getElementById('G8')
-const grid = document.querySelectorAll('.grid')
-const nowPlaying = document.querySelector('#isPlaying')
-const winner = document.querySelector('#winnerMessage')
+// Add event listener to all buttons
+buttons.forEach(button => {
+    button.addEventListener('click', function () {
+        const value = button.textContent;
+        lastClicked = button.id;
 
-console.log(myArray);
+        if (value.match(/[0-9]/)) {
+            // Number button clicked
+            input += value;
+            updateScreen();
+        } else if (value === '.') {
+            // Decimal point button clicked
+            if (!input.includes('.') && !input.endsWith('.')) {
+                input += value;
+                updateScreen();
+            }
+        } else if (value === '=') {
+            // Equal button clicked
+            calculate();
+        } else if (value === 'C') {
+            // Clear button clicked
+            clear();
+        } else if (value === 'CE') {
+            // Clear Entry button clicked
+            clearEntry();
+        } else if (value === 'Delete') {
+            // Delete button clicked
+            deleteLastCharacter();
+        } else if (value === '%' && input) {
+            // Percentage button clicked
+            input = String(parseFloat(input) / 100);
+            updateScreen();
+        } else if (value === '+/-' && input && input.length > 0 && !isNaN(input)) {
+            // Toggle Sign button clicked only if there's input
+            input = String(-parseFloat(input));
+            updateScreen();
+        } else if (value.match(/[\+\-\*\/]/)) {
+            // Operator button clicked
+            if (lastOperator && lastClicked !== 'equal' && input.trim().endsWith(lastOperator)) {
+                // Replace the previous operator with the new one
+                input = input.trim().slice(0, -1) + value + ' ';
+            } else {
+                input += ' ' + value + ' ';
+            }
+            lastOperator = value;
+            updateScreen();
+        }
+    });
+});
 
-// win condition
-function checkWinner(){
-let isFilled = myArray.every(element => element !== "")
-    if (isFilled == true){
-         winner.textContent = `It's a tie!`, winnerModal.style.display = "block";
+function updateScreen() {
+    screen2.textContent = input;
+}
+
+function clear() {
+    input = '';
+    result = null;
+    lastOperator = null;
+    updateScreen();
+    screen1.textContent = '';
+}
+
+function clearEntry() {
+    input = '';
+    updateScreen();
+}
+
+function deleteLastCharacter() {
+    input = input.slice(0, -1);
+    updateScreen();
+}
+
+function calculate() {
+    try {
+        result = eval(input);
+        if (!isNaN(result)) {
+            input = String(result);
+            updateScreen();
+            screen1.textContent = '';
+        } else {
+            input = 'Error';
+            updateScreen();
+            clear();
+        }
+    } catch (error) {
+        input = 'Error';
+        updateScreen();
+        clear();
     }
-
-        if (myArray[0] == "X" && myArray[1] == "X" && myArray[2] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[3] == "X" && myArray[4] == "X" && myArray[5] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[6] == "X" && myArray[7] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[0] == "X" && myArray[4] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[6] == "X" && myArray[4] == "X" && myArray[2] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[0] == "X" && myArray[3] == "X" && myArray[6] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[1] == "X" && myArray[4] == "X" && myArray[7] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-        else if (myArray[2] == "X" && myArray[5] == "X" && myArray[8] == "X") winner.textContent = 'Player 1 win!', winnerModal.style.display = "block";
-
-        else if (myArray[0] == "O" && myArray[1] == "O" && myArray[2] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[3] == "O" && myArray[4] == "O" && myArray[5] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[6] == "O" && myArray[7] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[0] == "O" && myArray[4] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[6] == "O" && myArray[4] == "O" && myArray[2] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[0] == "O" && myArray[3] == "O" && myArray[6] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[1] == "O" && myArray[4] == "O" && myArray[7] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else if (myArray[2] == "O" && myArray[5] == "O" && myArray[8] == "O") winner.textContent = 'Player 2 win!', winnerModal.style.display = "block";
-        else return
 }
-
-function populateArray(){
-    if (G0.textContent == 'X') myArray[0] = 'X';
-    if (G1.textContent == 'X') myArray[1] = 'X';
-    if (G2.textContent == 'X') myArray[2] = 'X';
-    if (G3.textContent == 'X') myArray[3] = 'X';
-    if (G4.textContent == 'X') myArray[4] = 'X';
-    if (G5.textContent == 'X') myArray[5] = 'X';
-    if (G6.textContent == 'X') myArray[6] = 'X';
-    if (G7.textContent == 'X') myArray[7] = 'X';
-    if (G8.textContent == 'X') myArray[8] = 'X';
-
-
-    if (G0.textContent == 'O') myArray[0] = 'O';
-    if (G1.textContent == 'O') myArray[1] = 'O';
-    if (G2.textContent == 'O') myArray[2] = 'O';
-    if (G3.textContent == 'O') myArray[3] = 'O';
-    if (G4.textContent == 'O') myArray[4] = 'O';
-    if (G5.textContent == 'O') myArray[5] = 'O';
-    if (G6.textContent == 'O') myArray[6] = 'O';
-    if (G7.textContent == 'O') myArray[7] = 'O';
-    if (G8.textContent == 'O') myArray[8] = 'O';
-}
-
-function changePlayer(){
-    if (curentPlayer === player1) curentPlayer = player2;
-    else curentPlayer = player1;
-}
-
-function displayPlayer(){
-    if(curentPlayer === player1) nowPlaying.textContent = 'Now Playing: Player 1 (X)';
-    else nowPlaying.textContent = `Now Playing: Player 2 (O)`;
-}
-
-//hover & click
-grid.forEach(box => {
-    box.addEventListener('mouseover', () => {
-        box.classList.add('hover')
-    })
-    box.addEventListener('mouseleave', () => {
-        box.classList.remove('hover')
-    })
-    box.addEventListener('click', () => {
-        // if (box.textContent == "") myArray[box.dataset.index] = curentPlayer;
-        // else return;
-
-        if (box.textContent == "") box.textContent = curentPlayer;
-        else return;
-        populateArray()
-        checkWinner()
-        changePlayer()
-        displayPlayer()
-        // computerMove()
-    })
-})
-
-displayPlayer()

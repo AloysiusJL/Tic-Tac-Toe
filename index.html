@@ -4,35 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="title">
-        <h1>Tic Tac Toe</h4>
-        <h1 id="isPlaying"></h1>
-    </div>
-    <div class="container">
-        <div class="grid G0" id="G0" data-index="0"></div>
-        <div class="grid G1" id="G1"data-index="1"></div>
-        <div class="grid G2" id="G2" data-index="2"></div>
-        <div class="grid G3" id="G3" data-index="3"></div>
-        <div class="grid G4" id="G4" data-index="4"></div>
-        <div class="grid G5" id="G5" data-index="5"></div>
-        <div class="grid G6" id="G6" data-index="6"></div>
-        <div class="grid G7" id="G7" data-index="7"></div>
-        <div class="grid G8" id="G8" data-index="8"></div>
-    </div>
-
-    <div id="winnerModal" class="modal">
-        <div class="modal-content">
-          <h2 id="winnerMessage"></h2>
-          <a href="https://mrbego.github.io/Tic-Tac-Toe/">
-            <button id="playAgainButton">Play again</button>
-          </a>
+    <div id="container">
+        <div class="calculator">
+            <div class="screen" id="screen">
+                <div class="result" id="result"></div>
+                <div class="input" id="input"></div>
+            </div>
+            <div class="pad" id="pad">
+            <!-- Operator buttons -->
+            <button class="operator" id="clear">C</button>
+            <button class="operator" id="ce">CE</button>
+            <button class="operator" id="delete">Delete</button>
+            <button class="operator" id="percentage">%</button>
+            <button class="operator" id="divide">/</button>
+            <button class="operator" id="multiply">*</button>
+            <button class="operator" id="subtract">-</button>
+            <button class="operator" id="add">+</button>
+            <button class="operator" id="toggle-sign">+/-</button>
+            <!-- Number and other buttons -->
+            <button class="numPad" id="numPad7">7</button>
+            <button class="numPad" id="numPad8">8</button>
+            <button class="numPad" id="numPad9">9</button>
+            <button class="numPad" id="numPad4">4</button>
+            <button class="numPad" id="numPad5">5</button>
+            <button class="numPad" id="numPad6">6</button>
+            <button class="numPad" id="numPad1">1</button>
+            <button class="numPad" id="numPad2">2</button>
+            <button class="numPad" id="numPad3">3</button>
+            <button class="numPad" id="numPad0">0</button>
+            <button class="numPad" id="decimal">.</button>
+            <button class="equal" id="equal">=</button>
         </div>
-      </div>
-
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
